@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeBot Buzz — AI News, Tech & Products by WeBot Agency</title>
+  <meta name="description" content="WeBot Buzz — AI tech news, product launches, and business insights from WeBot Agency. The hub for builders who ship.">
+  <meta property="og:title" content="WeBot Buzz — AI News, Tech & Products">
+  <meta property="og:description" content="AI industry news, product launches, builder stories, and business tools from WeBot Agency.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webot.buzz">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a1a;
+      --surface: #12122a;
+      --card: #1a1a36;
+      --gold: #ffd369;
+      --gold-dim: #ffd36944;
+      --green: #3fb950;
+      --green-dim: #3fb95044;
+      --blue: #5b7fff;
+      --blue-dim: #5b7fff22;
+      --purple: #a78bfa;
+      --purple-dim: #a78bfa22;
+      --red: #f85149;
+      --text: #e8e8f0;
+      --text-dim: #8888aa;
+      --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(ellipse at 20% 20%, rgba(91,127,255,0.04) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 80%, rgba(167,139,250,0.03) 0%, transparent 50%);
+      z-index: -1;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .logo { display: flex; align-items: baseline; gap: 2px; }
+    .logo .w { font-size: 22px; font-weight: 800; color: var(--blue); }
+    .logo .b { font-size: 22px; font-weight: 800; color: var(--purple); }
+    .logo .buzz { font-size: 12px; font-weight: 700; color: var(--gold); margin-left: 6px; padding: 2px 8px; border-radius: 6px; background: var(--gold-dim); }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { color: var(--text-dim); font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--blue); color: white !important; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; }
+    .nav-cta:hover { background: #4a6ee0; }
+
+    /* ── HERO ── */
+    .hero { padding: 70px 0 40px; text-align: center; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 20px;
+      background: var(--purple-dim); color: var(--purple); font-size: 12px; font-weight: 700; margin-bottom: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { font-size: clamp(30px, 5vw, 52px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -1px; }
+    .hero h1 .accent { color: var(--blue); }
+    .hero p { font-size: 16px; color: var(--text-dim); max-width: 560px; margin: 0 auto; }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 50px 0; }
+    .section-header { text-align: center; margin-bottom: 36px; }
+    .section-label { color: var(--purple); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+    .section-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .section-sub { color: var(--text-dim); font-size: 14px; max-width: 480px; margin: 0 auto; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); margin: 0; }
+
+    /* ── LATEST / NEWS ── */
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .news-card {
+      background: var(--surface); border: 1px solid var(--card); border-radius: var(--radius);
+      padding: 24px; transition: all 0.3s; cursor: pointer;
+    }
+    .news-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .news-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; }
+    .tag-launch { background: var(--green-dim); color: var(--green); }
+    .tag-news { background: var(--blue-dim); color: var(--blue); }
+    .tag-blog { background: var(--purple-dim); color: var(--purple); }
+    .tag-biz { background: var(--gold-dim); color: var(--gold); }
+    .news-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .news-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+    .news-date { font-size: 11px; color: var(--text-dim); margin-top: 12px; opacity: 0.6; }
+
+    /* ── PRODUCTS ── */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .product-card {
+      background: var(--surface); border: 1px solid var(--card); border-radius: var(--radius);
+      padding: 32px 24px; transition: all 0.3s;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card.bb { border-color: rgba(255,211,105,0.25); }
+    .product-card.bb:hover { box-shadow: 0 12px 40px rgba(255,211,105,0.06); }
+    .product-card.ty { border-color: rgba(63,185,80,0.25); }
+    .product-card.ty:hover { box-shadow: 0 12px 40px rgba(63,185,80,0.06); }
+    .p-icon { font-size: 32px; margin-bottom: 12px; }
+    .product-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+    .product-card.bb h3 { color: var(--gold); }
+    .product-card.ty h3 { color: var(--green); }
+    .p-tagline { font-size: 13px; color: var(--text-dim); font-style: italic; margin-bottom: 12px; }
+    .product-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 14px; }
+    .p-features { list-style: none; margin-bottom: 16px; }
+    .p-features li { font-size: 12px; padding: 3px 0; }
+    .p-features li::before { content: '→ '; color: var(--text-dim); }
+    .p-price { font-size: 24px; font-weight: 800; margin-bottom: 14px; }
+    .p-price span { font-size: 13px; font-weight: 400; color: var(--text-dim); }
+    .btn { display: inline-block; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: all 0.2s; }
+    .btn-gold { background: var(--gold); color: var(--bg); }
+    .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-green { background: var(--green); color: var(--bg); }
+    .btn-green:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-ghost { border: 1px solid var(--card); color: var(--text-dim); padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 500; margin-left: 8px; display: inline-block; }
+    .btn-ghost:hover { border-color: var(--text-dim); color: var(--text); }
+
+    /* ── BUSINESS CTA ── */
+    .biz-cta {
+      background: linear-gradient(135deg, var(--surface), var(--card));
+      border: 1px solid var(--gold); border-radius: var(--radius);
+      padding: 44px 32px; text-align: center; max-width: 700px; margin: 0 auto;
+    }
+    .biz-cta h2 { font-size: 24px; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
+    .biz-cta p { font-size: 14px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.7; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip { padding: 40px 0; text-align: center; }
+    .about-strip p { font-size: 14px; color: var(--text-dim); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+    .about-strip a { color: var(--blue); font-weight: 600; }
+    .about-links { display: flex; gap: 24px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+    .about-links a { color: var(--text-dim); font-size: 13px; transition: color 0.2s; }
+    .about-links a:hover { color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer { padding: 32px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+    footer p { font-size: 12px; color: var(--text-dim); }
+    footer a { color: var(--blue); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 40px 0 30px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- NAV -->
+    <nav>
+      <a href="/" class="logo"><span class="w">WeBot</span><span class="b">Agency</span><span class="buzz">BUZZ</span></a>
+      <div class="nav-links">
+        <a href="#latest">Latest</a>
+        <a href="#products">Products</a>
+        <a href="#business">Business</a>
+        <a href="https://webot.agency">Agency</a>
+        <a href="mailto:ian@webot.agency" class="nav-cta">Contact</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-tag"><span class="dot"></span> AI News · Tech · Products · Business</div>
+      <h1>The Hub for <span class="accent">AI That Ships</span></h1>
+      <p>Industry news, product launches, builder insights, and real AI tools — from the agency that actually builds them.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LATEST -->
+    <section class="section" id="latest">
+      <div class="section-header">
+        <div class="section-label">Latest</div>
+        <h2 class="section-title">What's Happening</h2>
+      </div>
+      <div class="news-grid">
+
+        <div class="news-card" style="grid-column: 1 / -1; border-color: rgba(91,127,255,0.3);">
+          <span class="news-tag tag-biz">🏢 Announcement</span>
+          <h3>Introducing WeBot Agency — Cutting-Edge AI Custom Agent Builders</h3>
+          <p>WeBot Agency is a new AI company specializing in custom intelligent agents, automation systems, and AI-powered products built for real businesses. We don't demo — we ship. Our agents handle email, scheduling, customer service, data ops, and workflows that used to take entire teams. From concept to production, we build AI that works on day one. <a href="https://webot.agency" style="color:var(--blue);font-weight:600">Meet the agency →</a></p>
+          <div class="news-date">March 2026 — Now Live</div>
+        </div>
+
+        <div class="news-card">
+          <span class="news-tag tag-launch">🚀 Launch</span>
+          <h3>Toury v0.1 — Free AI Tour Guide Now Available</h3>
+          <p>GPS-powered audio narration, 7-layer deep trip planning, parking pin, detour system. Free for users. Businesses can get featured as Hot Spots.</p>
+          <div class="news-date">March 29, 2026</div>
+        </div>
+
+        <div class="news-card">
+          <span class="news-tag tag-launch">🚀 Launch</span>
+          <h3>BudBee v0.3.6 — Privacy-First AI Assistant</h3>
+          <p>21 tools, your server, no data harvesting. Email, calendar, GPS, restaurants, flights, notes, journal. $5/mo. Android + Chrome extension.</p>
+          <div class="news-date">March 29, 2026</div>
+        </div>
+
+        <div class="news-card">
+          <span class="news-tag tag-biz">💼 Business</span>
+          <h3>Toury Hot Spots — A New Marketing Channel for Local Businesses</h3>
+          <p>Tourists are using AI tour guides. Get your restaurant, attraction, or shop recommended by name. QR code discounts drive foot traffic.</p>
+          <div class="news-date">March 29, 2026</div>
+        </div>
+
+        <div class="news-card">
+          <span class="news-tag tag-news">📰 AI News</span>
+          <h3>The Audio Tour Guide Market in 2026</h3>
+          <p>8 apps competing for tourists' attention. Most charge $15-$30 per city. Here's how AI is disrupting the entire category — and why free wins.</p>
+          <div class="news-date">Coming soon</div>
+        </div>
+
+        <div class="news-card">
+          <span class="news-tag tag-blog">📝 Blog</span>
+          <h3>Building Two AI Apps in One Day</h3>
+          <p>How modular architecture, documentation-first development, and the verification handshake let us ship BudBee and Toury from scratch to APK in 24 hours.</p>
+          <div class="news-date">Coming soon</div>
+        </div>
+
+        <div class="news-card">
+          <span class="news-tag tag-news">📰 AI News</span>
+          <h3>AI Agents in 2026: What's Real vs. What's Hype</h3>
+          <p>Everyone's talking about AI agents. We're building them. Here's what actually works, what doesn't, and where the industry is headed.</p>
+          <div class="news-date">Coming soon</div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+      <div class="section-header">
+        <div class="section-label">AI Products</div>
+        <h2 class="section-title">Built to Ship. Ready Now.</h2>
+        <p class="section-sub">Real products with real users. Not demos. Not proofs of concept.</p>
+      </div>
+      <div class="product-grid">
+
+        <div class="product-card bb">
+          <div class="p-icon">🐝</div>
+          <h3>BudBee</h3>
+          <div class="p-tagline">Your AI Assistant, Your Rules</div>
+          <p>Privacy-first AI assistant powered by Grok. 21 tools — email, calendar, tasks, reminders, GPS, weather, flights, hotels, restaurants, notes, journal. Runs on YOUR server.</p>
+          <ul class="p-features">
+            <li>21 tools — email, calendar, tasks, reminders, GPS, weather</li>
+            <li>Restaurant finder, recipe search, flights, hotels</li>
+            <li>Notes, journal, reminders with sound alerts</li>
+            <li>Your server. Your data. Zero cloud storage.</li>
+            <li>Android app + Chrome/Edge/Brave extension</li>
+          </ul>
+          <div class="p-price" style="color:var(--gold)">$5<span>/month</span></div>
+          <a href="https://github.com/F5-Products/BudBee/releases/latest" class="btn btn-gold">Get BudBee</a>
+          <a href="https://github.com/F5-Products/BudBee" class="btn-ghost">GitHub</a>
+        </div>
+
+        <div class="product-card ty">
+          <div class="p-icon">🗺️</div>
+          <h3>Toury</h3>
+          <div class="p-tagline">Your AI Tour Guide — Free, Everywhere</div>
+          <p>GPS-powered AI tour guide with audio narration. History, food, hidden gems, culture — she talks while you drive. Plan ahead for deep-dive tours or just explore.</p>
+          <ul class="p-features">
+            <li>Audio narration — hands-free while driving</li>
+            <li>GPS tracking + proximity alerts for landmarks</li>
+            <li>Plan trips for 7-layer deep research</li>
+            <li>Find food, parking, gas, activities, emergency</li>
+            <li>Pin parking + walking directions back to car</li>
+            <li>Detour anytime — resume, change plan, head home</li>
+          </ul>
+          <div class="p-price" style="color:var(--green)">FREE<span> — forever</span></div>
+          <a href="https://github.com/F5-Products/Toury/releases/latest" class="btn btn-green">Get Toury</a>
+          <a href="https://github.com/F5-Products/Toury" class="btn-ghost">GitHub</a>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- BUSINESS -->
+    <section class="section" id="business">
+      <div class="section-header">
+        <div class="section-label">For Business</div>
+        <h2 class="section-title">Partner With Us</h2>
+      </div>
+      <div class="biz-cta">
+        <h2>📍 Get Your Business on Toury</h2>
+        <p>Thousands of tourists use Toury to explore cities every day. Get featured as a <strong>Hot Spot</strong> — named audio recommendations, map highlights, and QR code discounts that drive real foot traffic to your door.</p>
+        <a href="mailto:ian@webot.agency?subject=Toury Business Partnership" class="btn btn-gold">Partner With Us</a>
+        <a href="https://webot.agency#services" class="btn-ghost">Custom AI Solutions →</a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section class="about-strip">
+      <p><strong>WeBot Buzz</strong> is the AI news, tech, and product hub from <a href="https://webot.agency">WeBot Agency</a> — a small AI company that builds real products, not pitch decks. We write about what we build, what we learn, and where AI is actually going.</p>
+      <div class="about-links">
+        <a href="https://webot.agency">🏢 WeBot Agency</a>
+        <a href="mailto:ian@webot.agency">✉️ Contact</a>
+        <a href="https://github.com/F5-Products">🔗 GitHub</a>
+        <a href="https://linkedin.com/company/webotagency">💼 LinkedIn</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 <a href="https://webot.agency">WeBot Agency</a> · An F5 Company · We Bot You!</p>
+    </footer>
+
+  </div>
+</body>
+</html>
