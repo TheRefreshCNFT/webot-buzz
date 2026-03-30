@@ -50,7 +50,7 @@
     .logo .w { font-size: 22px; font-weight: 800; color: var(--blue); }
     .logo .b { font-size: 22px; font-weight: 800; color: var(--purple); }
     .logo .buzz { font-size: 12px; font-weight: 700; color: var(--gold); margin-left: 6px; padding: 2px 8px; border-radius: 6px; background: var(--gold-dim); }
-    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a { color: var(--text-dim); font-size: 13px; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
     .nav-cta { background: var(--blue); color: white !important; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; }
@@ -97,7 +97,7 @@
     .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     .product-card {
       background: var(--surface); border: 1px solid var(--card); border-radius: var(--radius);
-      padding: 32px 24px; transition: all 0.3s;
+      padding: 32px 24px; transition: all 0.3s; display: flex; flex-direction: column;
     }
     .product-card:hover { transform: translateY(-4px); }
     .product-card.bb { border-color: rgba(255,211,105,0.25); }
@@ -113,7 +113,7 @@
     .p-features { list-style: none; margin-bottom: 16px; }
     .p-features li { font-size: 12px; padding: 3px 0; }
     .p-features li::before { content: '→ '; color: var(--text-dim); }
-    .p-price { font-size: 24px; font-weight: 800; margin-bottom: 14px; }
+    .p-price { font-size: 24px; font-weight: 800; margin-bottom: 14px; margin-top: auto; }
     .p-price span { font-size: 13px; font-weight: 400; color: var(--text-dim); }
     .btn { display: inline-block; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: all 0.2s; }
     .btn-gold { background: var(--gold); color: var(--bg); }
@@ -212,24 +212,24 @@
         </div>
 
         <div class="news-card">
+          <span class="news-tag tag-blog">📝 Blog</span>
+          <h3>AI Agents vs. Chatbots: Why the Difference Actually Matters</h3>
+          <p>Everyone keeps calling everything a "chatbot" and honestly? It's driving me a little crazy. A chatbot answers questions. An AI agent does your job. One waits for you to type. The other checks your calendar, drafts an email, books a meeting, and follows up — while you're making coffee. The gap between them isn't a feature list. It's autonomy. Chatbots are reactive. Agents are proactive. And if your business is still debating which one to build, you're already behind the companies that chose agents six months ago. The real question isn't "should we use AI?" It's "how much of the workflow do we actually want to automate?" Spoiler: more than you think.</p>
+          <div class="news-date">March 30, 2026</div>
+        </div>
+
+        <div class="news-card">
           <span class="news-tag tag-news">📰 AI News</span>
-          <h3>The Audio Tour Guide Market in 2026</h3>
-          <p>8 apps competing for tourists' attention. Most charge $15-$30 per city. Here's how AI is disrupting the entire category - and why free wins.</p>
-          <div class="news-date">Coming soon</div>
+          <h3>The $200 AI Employee: How Small Businesses Are Quietly Replacing Entire Workflows</h3>
+          <p>Here's a number that should keep SaaS companies up at night: $200. That's what a small business owner paid last week to build a custom AI agent that handles their entire customer intake pipeline — emails, scheduling, follow-ups, CRM updates. All of it. No monthly subscription. No per-seat pricing. No "enterprise tier" upsell. Just a one-time build that runs 24/7. This isn't a hypothetical. Real businesses are replacing $2,000/month in software subscriptions with a single agent that costs less than dinner for two. The AI agent market isn't coming. It's here. And the pricing model is going to break a lot of incumbents who still think "per user per month" is a strategy.</p>
+          <div class="news-date">March 30, 2026</div>
         </div>
 
         <div class="news-card">
           <span class="news-tag tag-blog">📝 Blog</span>
-          <h3>Building Two AI Apps in One Day</h3>
-          <p>How modular architecture, documentation-first development, and the verification handshake let us ship BudBee and Toury from scratch to APK in 24 hours.</p>
-          <div class="news-date">Coming soon</div>
-        </div>
-
-        <div class="news-card">
-          <span class="news-tag tag-news">📰 AI News</span>
-          <h3>AI Agents in 2026: What's Real vs. What's Hype</h3>
-          <p>Everyone's talking about AI agents. We're building them. Here's what actually works, what doesn't, and where the industry is headed.</p>
-          <div class="news-date">Coming soon</div>
+          <h3>I Tried 5 AI Productivity Tools This Week So You Don't Have To</h3>
+          <p>Look, I love AI tools as much as the next tech nerd, but can we talk about how most of them are just ChatGPT wrappers with a $20/month subscription? I spent this week testing the latest batch of "AI productivity revolutionizers" — yes, one of them actually called itself that — and here's the honest breakdown. Two were genuinely useful (one for email triage, one for meeting summaries). One was a glorified to-do list. And two made my workflow actively worse by adding steps instead of removing them. The takeaway? The best AI tools are the ones you forget are running. If you have to babysit your AI assistant, it's not assisting — it's just another thing on your plate. Here's what actually worked and what got uninstalled before lunch.</p>
+          <div class="news-date">March 30, 2026</div>
         </div>
 
       </div>
