@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unsubscribe — WeBot Buzz</title>
+  <style>
+    :root { --bg: #0a0a1a; --surface: #12122a; --blue: #5b7fff; --green: #3fb950; --text: #e8e8f0; --text-dim: #8888aa; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { background: var(--surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 48px 40px; max-width: 480px; width: 100%; text-align: center; }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+    p { color: var(--text-dim); font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+    .email-display { font-size: 16px; font-weight: 600; color: var(--blue); margin-bottom: 24px; word-break: break-all; }
+    .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-unsub { background: #f85149; color: white; }
+    .btn-unsub:hover { background: #e03e36; transform: translateY(-1px); }
+    .btn-back { background: transparent; color: var(--text-dim); border: 1px solid rgba(255,255,255,0.1); margin-left: 8px; text-decoration: none; }
+    .btn-back:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    .result { display: none; }
+    .result h2 { font-size: 22px; margin-bottom: 12px; }
+    .buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    @media (max-width: 480px) { .card { padding: 32px 20px; } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="form-view">
+      <h1>Unsubscribe</h1>
+      <p>We're sorry to see you go. Click below to unsubscribe from The Buzz newsletter.</p>
+      <div class="email-display" id="email-display"></div>
+      <div class="buttons">
+        <button class="btn btn-unsub" id="unsub-btn" onclick="doUnsubscribe()">Unsubscribe</button>
+        <a href="https://webot.buzz" class="btn btn-back">Never mind →</a>
+      </div>
+    </div>
+    <div id="success-view" class="result">
+      <h2>✅ You've been unsubscribed</h2>
+      <p>You won't receive any more emails from The Buzz. If this was a mistake, just sign up again at <a href="https://webot.buzz" style="color:var(--blue)">webot.buzz</a>.</p>
+      <a href="https://webot.buzz" class="btn btn-back" style="margin:0">Back to Buzz →</a>
+    </div>
+    <div id="error-view" class="result">
+      <h2>Something went wrong</h2>
+      <p>Reply <strong>STOP</strong> to any newsletter email, or email <a href="mailto:hello@webot.agency" style="color:var(--blue)">hello@webot.agency</a> and we'll remove you manually.</p>
+    </div>
+  </div>
+  <script>
+    const API = 'http://141.148.79.11:8080/unsubscribe';
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email') || '';
+    document.getElementById('email-display').textContent = email || 'No email provided';
+    if (!email) document.getElementById('unsub-btn').disabled = true;
+
+    function doUnsubscribe() {
+      const btn = document.getElementById('unsub-btn');
+      btn.textContent = 'Unsubscribing...';
+      btn.disabled = true;
+      fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      .then(r => r.json())
+      .then(() => {
+        document.getElementById('form-view').style.display = 'none';
+        document.getElementById('success-view').style.display = 'block';
+      })
+      .catch(() => {
+        document.getElementById('form-view').style.display = 'none';
+        document.getElementById('error-view').style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>
