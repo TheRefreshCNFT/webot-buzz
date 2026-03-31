@@ -45,7 +45,7 @@
     </div>
   </div>
   <script>
-    const API = 'http://141.148.79.11:8080/unsubscribe';
+    const API = 'https://crm.webot.agency/unsubscribe';
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email') || '';
     document.getElementById('email-display').textContent = email || 'No email provided';

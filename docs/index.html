@@ -362,7 +362,7 @@
     document.addEventListener('click', e => { if (!nav.contains(e.target) && navLinks.classList.contains('open')) closeMenu(); });
     window.addEventListener('resize', () => { if (window.innerWidth > 768) closeMenu(); });
 
-    const SUBSCRIBE_URL = 'http://141.148.79.11:8080/subscribe';
+    const SUBSCRIBE_URL = 'https://crm.webot.agency/subscribe';
     const buzzForm = document.getElementById('buzz-signup');
     if (buzzForm) {
       buzzForm.addEventListener('submit', function(e) {
