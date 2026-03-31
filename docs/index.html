@@ -362,15 +362,36 @@
     document.addEventListener('click', e => { if (!nav.contains(e.target) && navLinks.classList.contains('open')) closeMenu(); });
     window.addEventListener('resize', () => { if (window.innerWidth > 768) closeMenu(); });
 
+    const SUBSCRIBE_URL = 'http://141.148.79.11:8080/subscribe';
     const buzzForm = document.getElementById('buzz-signup');
     if (buzzForm) {
       buzzForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const email = document.getElementById('buzz-email').value;
-        const subs = JSON.parse(localStorage.getItem('webot_buzz_subs') || '[]');
-        if (!subs.includes(email)) { subs.push(email); localStorage.setItem('webot_buzz_subs', JSON.stringify(subs)); }
-        buzzForm.style.display = 'none';
-        document.getElementById('buzz-success').style.display = 'block';
+        const btn = buzzForm.querySelector('button');
+        btn.textContent = 'Signing up...';
+        btn.disabled = true;
+        fetch(SUBSCRIBE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'buzz' })
+        })
+        .then(r => r.json())
+        .then(data => {
+          buzzForm.style.display = 'none';
+          const msg = document.getElementById('buzz-success');
+          if (data.status === 'already_subscribed') {
+            msg.textContent = "You're already on the list! 🐝";
+          }
+          msg.style.display = 'block';
+        })
+        .catch(() => {
+          buzzForm.style.display = 'none';
+          document.getElementById('buzz-success').style.display = 'block';
+          // Fallback: save locally too
+          const subs = JSON.parse(localStorage.getItem('webot_buzz_subs') || '[]');
+          if (!subs.includes(email)) { subs.push(email); localStorage.setItem('webot_buzz_subs', JSON.stringify(subs)); }
+        });
       });
     }
   </script>
